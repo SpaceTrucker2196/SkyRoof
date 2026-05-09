@@ -42,18 +42,30 @@ void SkyRoofLogMessage(SkyRoofLogLevel logLevel, const char* message)
   void* callbackContext = globalLogContext;
   UnlockLogState();
 
-  if(callback != NULL) {
+  if(callback != NULL)
     callback(logLevel, message, callbackContext);
+  if(callback != NULL)
     return;
-  }
 
   const char* levelName = "INFO";
-  if(logLevel == SkyRoofLogLevelDebug)
-    levelName = "DEBUG";
-  else if(logLevel == SkyRoofLogLevelWarning)
-    levelName = "WARN";
-  else if(logLevel == SkyRoofLogLevelError)
-    levelName = "ERROR";
+  switch(logLevel)
+  {
+    case SkyRoofLogLevelDebug:
+      levelName = "DEBUG";
+      break;
+    case SkyRoofLogLevelInfo:
+      levelName = "INFO";
+      break;
+    case SkyRoofLogLevelWarning:
+      levelName = "WARN";
+      break;
+    case SkyRoofLogLevelError:
+      levelName = "ERROR";
+      break;
+    default:
+      levelName = "INFO";
+      break;
+  }
 
   fprintf(stderr, "[%s] %s\n", levelName, message);
 }
