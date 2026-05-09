@@ -11,7 +11,7 @@ static int ParseDouble(const char* input, double* value)
 
   char* parseEnd = NULL;
   double parsed = strtod(input, &parseEnd);
-  if(parseEnd == input || (parseEnd != NULL && *parseEnd != '\0'))
+  if(parseEnd == input || *parseEnd != '\0')
     return 0;
 
   *value = parsed;

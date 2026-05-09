@@ -1,21 +1,27 @@
 #include "SkyRoofCore.h"
 
 #include <stdio.h>
-#include <stdatomic.h>
+#include <threads.h>
 
 static SkyRoofLogCallback globalLogCallback;
 static void* globalLogContext;
-static atomic_flag logLock = ATOMIC_FLAG_INIT;
+static once_flag logMutexInitFlag = ONCE_FLAG_INIT;
+static mtx_t logMutex;
+
+static void InitializeLogMutex(void)
+{
+  mtx_init(&logMutex, mtx_plain);
+}
 
 static void LockLogState(void)
 {
-  while(atomic_flag_test_and_set(&logLock))
-    ;
+  call_once(&logMutexInitFlag, InitializeLogMutex);
+  mtx_lock(&logMutex);
 }
 
 static void UnlockLogState(void)
 {
-  atomic_flag_clear(&logLock);
+  mtx_unlock(&logMutex);
 }
 
 void SkyRoofLogSetCallback(SkyRoofLogCallback callback, void* context)

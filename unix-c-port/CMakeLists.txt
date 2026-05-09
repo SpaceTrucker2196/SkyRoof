@@ -19,6 +19,7 @@ if(PKG_CONFIG_FOUND)
 endif()
 
 find_package(FFTW3f QUIET)
+find_package(Threads REQUIRED)
 
 add_library(skyroof_core STATIC
   src/SkyRoofCore.c
@@ -51,6 +52,8 @@ if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
     target_compile_options(skyroof_core PRIVATE -Werror)
   endif()
 endif()
+
+target_link_libraries(skyroof_core PRIVATE Threads::Threads)
 
 add_library(skyroof_unix_adapter STATIC
   adapters/unix/UnixAudioStub.c
