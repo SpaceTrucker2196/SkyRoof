@@ -1,1 +1,0 @@
-/usr/bin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/test_satellite.dir/link.d CMakeFiles/test_satellite.dir/tests/test_satellite.c.o -o test_satellite  libskyroof_core.a -lm
