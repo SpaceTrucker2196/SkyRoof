@@ -40,8 +40,7 @@ SkyRoofStatus SkyRoofSampleBufferWrite(SkyRoofSampleBuffer* sampleBuffer, const 
   if(count > sampleBuffer->capacity - sampleBuffer->size)
     return SkyRoofStatusOverflow;
 
-  for(size_t i = 0; i < count; ++i)
-  {
+  for(size_t i = 0; i < count; ++i) {
     sampleBuffer->data[sampleBuffer->writeIndex] = input[i];
     sampleBuffer->writeIndex = (sampleBuffer->writeIndex + 1) % sampleBuffer->capacity;
   }
@@ -58,8 +57,7 @@ SkyRoofStatus SkyRoofSampleBufferRead(SkyRoofSampleBuffer* sampleBuffer, float* 
   if(count > sampleBuffer->size)
     return SkyRoofStatusUnderflow;
 
-  for(size_t i = 0; i < count; ++i)
-  {
+  for(size_t i = 0; i < count; ++i) {
     output[i] = sampleBuffer->data[sampleBuffer->readIndex];
     sampleBuffer->readIndex = (sampleBuffer->readIndex + 1) % sampleBuffer->capacity;
   }

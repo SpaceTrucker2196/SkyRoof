@@ -16,8 +16,7 @@ void SkyRoofLogMessage(SkyRoofLogLevel logLevel, const char* message)
   if(message == NULL)
     return;
 
-  if(globalLogCallback != NULL)
-  {
+  if(globalLogCallback != NULL) {
     globalLogCallback(logLevel, message, globalLogContext);
     return;
   }

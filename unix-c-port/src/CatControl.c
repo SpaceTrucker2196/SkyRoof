@@ -29,8 +29,7 @@ SkyRoofStatus SkyRoofCatParseCommand(const char* command, SkyRoofCatState* catSt
   if(sscanf(command, "%3s %31s", opcode, value) < 1)
     return SkyRoofStatusInvalidArgument;
 
-  if(strcmp(opcode, "F") == 0)
-  {
+  if(strcmp(opcode, "F") == 0) {
     SkyRoofStatus status = ParseFrequency(value, &catState->rxFrequencyHz);
     if(status != SkyRoofStatusOk)
       return status;

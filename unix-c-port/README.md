@@ -37,15 +37,15 @@ Optional auto-detected dependencies (for later feature phases):
 ## build and test
 
 ```sh
-/home/runner/work/SkyRoof/SkyRoof/unix-c-port/scripts/build-unix.sh
+./scripts/build-unix.sh
 ```
 
 or manually:
 
 ```sh
-cmake -S /home/runner/work/SkyRoof/SkyRoof/unix-c-port -B /home/runner/work/SkyRoof/SkyRoof/unix-c-port/build
-cmake --build /home/runner/work/SkyRoof/SkyRoof/unix-c-port/build --parallel
-ctest --test-dir /home/runner/work/SkyRoof/SkyRoof/unix-c-port/build --output-on-failure
+cmake -S . -B build
+cmake --build build --parallel
+ctest --test-dir build --output-on-failure
 ```
 
 ## migration sequence represented by this implementation
