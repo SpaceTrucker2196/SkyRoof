@@ -1,0 +1,2 @@
+/usr/bin/ar qc libskyroof_core.a CMakeFiles/skyroof_core.dir/src/SkyRoofCore.c.o CMakeFiles/skyroof_core.dir/src/SampleBuffer.c.o CMakeFiles/skyroof_core.dir/src/CatControl.c.o CMakeFiles/skyroof_core.dir/src/Satellite.c.o
+/usr/bin/ranlib libskyroof_core.a

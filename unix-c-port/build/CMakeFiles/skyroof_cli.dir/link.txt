@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG -Wl,--dependency-file=CMakeFiles/skyroof_cli.dir/link.d CMakeFiles/skyroof_cli.dir/apps/skyroof_cli.c.o -o skyroof_cli  libskyroof_core.a libskyroof_unix_adapter.a -lm libskyroof_core.a

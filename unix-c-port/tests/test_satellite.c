@@ -6,7 +6,7 @@ int main(void)
 {
   const double baseHz = 145950000.0;
   const double radialVelocity = 7600.0;
-  const double expectedShift = 3698.992741;
+  const double expectedShift = 3699.959657;
 
   double actualShift = SkyRoofDopplerShiftHz(baseHz, radialVelocity);
   if(fabs(actualShift - expectedShift) > 0.5)

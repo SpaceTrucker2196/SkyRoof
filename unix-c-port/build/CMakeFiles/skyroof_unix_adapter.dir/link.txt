@@ -1,0 +1,2 @@
+/usr/bin/ar qc libskyroof_unix_adapter.a CMakeFiles/skyroof_unix_adapter.dir/adapters/unix/UnixAudioStub.c.o
+/usr/bin/ranlib libskyroof_unix_adapter.a
