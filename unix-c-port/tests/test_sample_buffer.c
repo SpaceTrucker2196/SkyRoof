@@ -15,7 +15,7 @@ int main(void)
   if(SkyRoofSampleBufferSize(&sampleBuffer) != 3)
     return 1;
 
-  float output[] = {0};
+  float output[] = {0, 0};
   if(SkyRoofSampleBufferRead(&sampleBuffer, output, 2) != SkyRoofStatusOk)
     return 1;
 

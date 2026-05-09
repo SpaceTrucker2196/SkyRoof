@@ -11,7 +11,7 @@ static SkyRoofStatus ParseFrequency(const char* value, unsigned long long* frequ
 
   char* parseEnd = NULL;
   unsigned long long parsed = strtoull(value, &parseEnd, 10);
-  if(parseEnd == value || (parseEnd != NULL && *parseEnd != '\0'))
+  if(parseEnd == value || *parseEnd != '\0')
     return SkyRoofStatusInvalidArgument;
 
   if(parsed == 0)

@@ -1,14 +1,29 @@
 #include "SkyRoofCore.h"
 
 #include <stdio.h>
+#include <stdatomic.h>
 
 static SkyRoofLogCallback globalLogCallback;
 static void* globalLogContext;
+static atomic_flag logLock = ATOMIC_FLAG_INIT;
+
+static void LockLogState(void)
+{
+  while(atomic_flag_test_and_set(&logLock))
+    ;
+}
+
+static void UnlockLogState(void)
+{
+  atomic_flag_clear(&logLock);
+}
 
 void SkyRoofLogSetCallback(SkyRoofLogCallback callback, void* context)
 {
+  LockLogState();
   globalLogCallback = callback;
   globalLogContext = context;
+  UnlockLogState();
 }
 
 void SkyRoofLogMessage(SkyRoofLogLevel logLevel, const char* message)
@@ -16,8 +31,13 @@ void SkyRoofLogMessage(SkyRoofLogLevel logLevel, const char* message)
   if(message == NULL)
     return;
 
-  if(globalLogCallback != NULL) {
-    globalLogCallback(logLevel, message, globalLogContext);
+  LockLogState();
+  SkyRoofLogCallback callback = globalLogCallback;
+  void* callbackContext = globalLogContext;
+  UnlockLogState();
+
+  if(callback != NULL) {
+    callback(logLevel, message, callbackContext);
     return;
   }
 
