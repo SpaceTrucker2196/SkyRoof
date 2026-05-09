@@ -4,6 +4,20 @@
 #include <stdlib.h>
 #include <string.h>
 
+static int ParseDouble(const char* input, double* value)
+{
+  if(input == NULL || value == NULL)
+    return 0;
+
+  char* parseEnd = NULL;
+  double parsed = strtod(input, &parseEnd);
+  if(parseEnd == input || (parseEnd != NULL && *parseEnd != '\0'))
+    return 0;
+
+  *value = parsed;
+  return 1;
+}
+
 static int RunDoppler(int argc, char** argv)
 {
   if(argc < 4) {
@@ -11,8 +25,13 @@ static int RunDoppler(int argc, char** argv)
     return 1;
   }
 
-  double baseHz = atof(argv[2]);
-  double radialVelocity = atof(argv[3]);
+  double baseHz = 0.0;
+  double radialVelocity = 0.0;
+  if(!ParseDouble(argv[2], &baseHz) || !ParseDouble(argv[3], &radialVelocity)) {
+    fprintf(stderr, "base_hz and radial_velocity_mps must be numeric values\n");
+    return 1;
+  }
+
   double shift = SkyRoofDopplerShiftHz(baseHz, radialVelocity);
   printf("%.6f\n", shift);
   return 0;
